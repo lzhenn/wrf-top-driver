@@ -1,0 +1,39 @@
+&share
+ wrf_core = 'ARW',
+ max_dom = 4,
+ start_date = '2020-05-01_00:00:00','2020-05-01_00:00:00','2020-05-01_00:00:00','2020-05-01_00:00:00',
+ end_date = '2020-05-02_00:00:00','2020-05-02_00:00:00','2020-05-02_00:00:00','2020-05-02_00:00:00',
+ interval_seconds = 3600,
+ io_form_geogrid = 2,
+ debug_level = 0,
+/
+
+&geogrid
+ parent_id          =   1,   1,   2,   3,
+ parent_grid_ratio  =   1,   3,   3,   3,
+ i_parent_start     =   1,   116, 43,  67,
+ j_parent_start     =   1,   45,  55,  22,
+ e_we               =  283,  223, 172, 214,
+ e_sn               =  184,  163, 130, 163,
+
+ geog_data_res      = 'usgs_10m','usgs_5m','wudapt_d3_4pt+cuhk_2010_lu+usgs_2m','wudapt_d3_4pt+cuhk_2010_lu+usgs_30s'
+ dx = 27000,
+ dy = 27000,
+ map_proj = 'lambert',
+ ref_lat   = 28.5,
+ ref_lon   = 114.0,
+ truelat1  = 15.0,
+ truelat2  = 40.0,
+ stand_lon = 114.0,
+ geog_data_path = '/home/metctm1/array/data/GEOG/',
+/
+
+&ungrib
+ out_format = 'WPS',
+ prefix = 'ERASL',
+/
+
+&metgrid
+ fg_name = 'ERAPL', 'ERASL',
+ io_form_metgrid = 2,
+/
