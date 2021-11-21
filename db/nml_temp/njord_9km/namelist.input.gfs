@@ -35,15 +35,15 @@
  /
 
  &domains
- time_step                           = 30,
+ time_step                           = 45,
  time_step_fract_num                 = 0,
  time_step_fract_den                 = 1,
- max_dom                             = 2,
+ max_dom                             = 1,
  e_we                                = 340,   331,   340,
  e_sn                                = 340,   301,   310,
  e_vert                              = 51,    51,    51,
- p_top_requested                     = 7000,
- num_metgrid_levels                  = 24,
+ p_top_requested                     = 5000,
+ num_metgrid_levels                  = 34,
  num_metgrid_soil_levels             = 4,
  dx                                  = 9000,  3000,  1000,
  dy                                  = 9000,  3000,  1000,
@@ -61,7 +61,7 @@
  mp_physics                          = 10,    10,    10,
  ra_lw_physics                       = 4,     4,     4,
  ra_sw_physics                       = 4,     4,     4,
- radt                                = 30,   30,    30,
+ radt                                = 45,   45,    45,
  slope_rad                           = 0,     0,     1,
  topo_shading                        = 0,     0,     1,
 ! pbl and sf 2 for MYJ and 5 for MYNN 
