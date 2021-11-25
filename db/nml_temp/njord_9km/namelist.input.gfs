@@ -18,7 +18,7 @@
  interval_seconds                    = 10800,
  input_from_file                     = .true.,.true.,.true.,
  history_interval                    = 60,    60,    60,
- frames_per_outfile                  = 1,  1,    1,
+ frames_per_outfile                  = 24,  1,    1,
  restart                             = .false.,
  restart_interval                    = 1440,
  auxinput4_inname                    = "wrflowinp_d<domain>",
