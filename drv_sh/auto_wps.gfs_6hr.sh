@@ -26,8 +26,8 @@ rm -f met_em.*
 rm -f GFS:*
 rm -f CFS:*
 rm -f ERA*
+rm -f PFILE*
 rm -f SST:*
-rm -f PFILE:*
 
 
 # Process GFS

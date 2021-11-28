@@ -33,12 +33,34 @@ LAT_BOTTOM=5
 
 # ------------Upper for user-defined configurations ------------
 
+FETCH_DAY=$(date -d "${STRT_YMDH:0:8}" +%Y%m%d)
+TODAY=$(date +%Y%m%d)
+TIME_DELTA=`expr $TODAY - $FETCH_DAY`
+
 if [ ! -d $ARCH_PATH ]; then
     mkdir $ARCH_PATH
 fi
 
+# not realtime, try get from envf server
+if [ $TIME_DELTA -gt 5 ]; then
+    echo "not realtime, exit"
+    exit
+    CURR_DATE=$FETCH_DAY
+    ADD_DAY=0
+    while [ $ADD_DAY -lt $FCST_DAY ]
+    do
+        BASE_URL="/home/dataop/archive/vol001/ncep/gfs_0.25deg_archive/${CURR_DATE:0:4}/${CURR_DATE:0:6}/${CURR_DATE:0:8}/"
+        echo $BASE_URL
+        #ln -s $BASE_URL/*f000* ./
+        ADD_DAY=`expr $ADD_DAY + 1`
+        CURR_DATE=$(date -d "${STRT_YMDH:0:8} +${ADD_DAY}day" +%Y%m%d)
+    done
+fi
 
 TOTAL_HR=`expr $FCST_DAY \* 24`
+
+
+# fetch from ncep server
 
 BASE_URL="https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl"
 
