@@ -58,7 +58,7 @@ if [ $REAL_FLAG == 1 ]; then
     rm -f wrflowinp_d0*
     rm -f wrfbdy_d0*
     rm -f wrffda*
-
+    rm -f wrfrst*
     echo ">>>>WRF-REAL: Run real.exe..."
     ln -sf $WPS_DIR/met_em.d0* ./
     mpirun -np 16 ./real.exe

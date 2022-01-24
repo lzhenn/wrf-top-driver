@@ -31,7 +31,7 @@ rm -f met_em.*
 rm -f GFS:*
 rm -f CFS*
 rm -f PFILE*
-rm -f ERA:*
+rm -f ERA*
 rm -f SST:*
 
 echo "Working on WPS..."
