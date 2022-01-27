@@ -11,16 +11,16 @@
 
 # ------------Below for user-defined configurations ------------
 # Start time 
-STRT_YMDH=$1
-#STRT_YMDH=2021062712
+#STRT_YMDH=$1
+STRT_YMDH=2022012612
 
 # Archive path
-ARCH_PATH=$2
-#ARCH_PATH=/home/lzhenn/array74/Njord_Calypso/drv_field/gfs/2021062712
+#ARCH_PATH=$2
+ARCH_PATH=/home/lzhenn/array74/Njord_Calypso/drv_field/gfs/2022012612
 
 # How long period to fecth
-FCST_DAY=$3
-#FCST_DAY=1
+#FCST_DAY=$3
+FCST_DAY=1
 
 # The interval to fetch GFS output, 3-hr preferred, 
 # 1-hr minimum, and no longer than 6-hr.
@@ -86,12 +86,33 @@ TS_FILTER="&dir=%2Fgfs."${STRT_YMDH:0:8}"%2F"${STRT_YMDH:8}"%2Fatmos"
 
 for CURR_HR in $(seq 0 $FRQ $TOTAL_HR) 
 do
-    
+    TRY_TIME=2
+
     TSTEP=`printf "%03d" $CURR_HR`
     
     FN_FILTER="?file=gfs.t"${STRT_YMDH:8}"z.pgrb2.0p25.f"${TSTEP}
     
     SRC_URL=${BASE_URL}${FN_FILTER}${LV_FILTER}${VAR_FILTER}${DOMAIN_FILTER}${TS_FILTER}
     
-    wget ${SRC_URL} -O ${ARCH_PATH}/${FN_FILTER:6}
+    while (( $TRY_TIME>0 ))
+    do
+        wget ${SRC_URL} -O ${ARCH_PATH}/${FN_FILTER:6}
+        if [[ "$?" == 0 ]]; then
+            FILESIZE=$(stat -c%s "${ARCH_PATH}/${FN_FILTER:6}")
+            if (( $FILESIZE<6000000 )); then
+                echo "File size not correct, try again in 60s..."
+                TRY_TIME=`expr $TRY_TIME - 1`
+                sleep 60
+            else
+                break
+            fi
+        else
+            echo "Error downloading file, try again in 60s..."
+            TRY_TIME=`expr $TRY_TIME - 1`
+            sleep 60
+        fi
+    done
+    if (( $TRY_TIME == 0)); then
+        echo "Download "${ARCH_PATH}/${FN_FILTER:6} "failed after maximum attampts!!!"
+    fi
 done 
