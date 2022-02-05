@@ -11,32 +11,39 @@
 
 # ------------Below for user-defined configurations ------------
 # Start time 
-#STRT_YMDH=$1
-STRT_YMDH=2022012612
+STRT_YMDH=$1
+#STRT_YMDH=2022012612
 
 # Archive path
-#ARCH_PATH=$2
-ARCH_PATH=/home/lzhenn/array74/Njord_Calypso/drv_field/gfs/2022012612
+ARCH_PATH=$2
+#ARCH_PATH=/home/lzhenn/array74/Njord_Calypso/drv_field/gfs/2022012612
 
 # How long period to fecth
-#FCST_DAY=$3
-FCST_DAY=1
+FCST_DAY=$3
+#FCST_DAY=1
 
 # The interval to fetch GFS output, 3-hr preferred, 
 # 1-hr minimum, and no longer than 6-hr.
 FRQ=3
+
+# Resolution: 0p50, 0p25
+RES=0p50
 
 LON_LEFT=95
 LON_RIGHT=135
 LAT_TOP=40
 LAT_BOTTOM=5
 
+# try time interval in seconds
+TRY_INTERVAL=90
+
 # ------------Upper for user-defined configurations ------------
 
 FETCH_DAY=$(date -d "${STRT_YMDH:0:8}" +%Y%m%d)
 TODAY=$(date +%Y%m%d)
 TIME_DELTA=`expr $TODAY - $FETCH_DAY`
-
+echo $FETCH_DAY----$TODAY
+echo $TIME_DELTA
 if [ ! -d $ARCH_PATH ]; then
     mkdir $ARCH_PATH
 fi
@@ -62,7 +69,7 @@ TOTAL_HR=`expr $FCST_DAY \* 24`
 
 # fetch from ncep server
 
-BASE_URL="https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_0p25.pl"
+BASE_URL="https://nomads.ncep.noaa.gov/cgi-bin/filter_gfs_"$RES".pl"
 
 
 LV_FILTER="&lev_0-0.1_m_below_ground=on&lev_0.1-0.4_m_below_ground=on&lev_0.4-1_m_below_ground=on"
@@ -86,12 +93,16 @@ TS_FILTER="&dir=%2Fgfs."${STRT_YMDH:0:8}"%2F"${STRT_YMDH:8}"%2Fatmos"
 
 for CURR_HR in $(seq 0 $FRQ $TOTAL_HR) 
 do
-    TRY_TIME=2
+    TRY_TIME=10
 
     TSTEP=`printf "%03d" $CURR_HR`
-    
-    FN_FILTER="?file=gfs.t"${STRT_YMDH:8}"z.pgrb2.0p25.f"${TSTEP}
-    
+    if [ $RES == "0p25"]; then
+        FN_FILTER="?file=gfs.t"${STRT_YMDH:8}"z.pgrb2.0p25.f"${TSTEP}
+        NOM_SIZE=6000000
+    else
+        FN_FILTER="?file=gfs.t"${STRT_YMDH:8}"z.pgrb2full.0p50.f"${TSTEP}
+        NOM_SIZE=1000000
+    fi
     SRC_URL=${BASE_URL}${FN_FILTER}${LV_FILTER}${VAR_FILTER}${DOMAIN_FILTER}${TS_FILTER}
     
     while (( $TRY_TIME>0 ))
@@ -99,17 +110,17 @@ do
         wget ${SRC_URL} -O ${ARCH_PATH}/${FN_FILTER:6}
         if [[ "$?" == 0 ]]; then
             FILESIZE=$(stat -c%s "${ARCH_PATH}/${FN_FILTER:6}")
-            if (( $FILESIZE<6000000 )); then
-                echo "File size not correct, try again in 60s..."
+            if (( $FILESIZE<$NOM_SIZE )); then
+                echo "File size not correct, try again in "$TRY_INTERVAL"s..."
                 TRY_TIME=`expr $TRY_TIME - 1`
-                sleep 60
+                sleep $TRY_INTERVAL
             else
                 break
             fi
         else
-            echo "Error downloading file, try again in 60s..."
+            echo "Error downloading file, try again in "$TRY_INTERVAL"s..."
             TRY_TIME=`expr $TRY_TIME - 1`
-            sleep 60
+            sleep $TRY_INTERVAL
         fi
     done
     if (( $TRY_TIME == 0)); then

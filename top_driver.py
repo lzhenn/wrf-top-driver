@@ -5,9 +5,9 @@ Date: May 1, 2021 (Labour Day!)
 This is the main script to drive the era5-wrf-driver 
 
 Revision:
-May 1,  2021 --- MVP v0.01 completed
-Aug 25, 2021 --- Revision
 Oct 23, 2021 --- Fit for CFSv2
+Aug 25, 2021 --- Revision
+May 1,  2021 --- MVP v0.01 completed
 
 Zhenning LI
 '''
