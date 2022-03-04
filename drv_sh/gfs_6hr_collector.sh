@@ -39,9 +39,10 @@ TRY_INTERVAL=90
 
 # ------------Upper for user-defined configurations ------------
 
-FETCH_DAY=$(date -d "${STRT_YMDH:0:8}" +%Y%m%d)
-TODAY=$(date +%Y%m%d)
+FETCH_DAY=$(date -d "${STRT_YMDH:0:8}" +%s)
+TODAY=$(date +%s)
 TIME_DELTA=`expr $TODAY - $FETCH_DAY`
+TIME_DELTA=`expr $TIME_DELTA / 86400`
 echo $FETCH_DAY----$TODAY
 echo $TIME_DELTA
 if [ ! -d $ARCH_PATH ]; then

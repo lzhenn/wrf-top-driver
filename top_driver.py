@@ -41,8 +41,8 @@ def main_run():
             CMDARGS=' %s %s %s'
             CMDLINE=CMDLINE+CMDARGS
             os.system(CMDLINE % (
-                    ctrler.start_time.strftime('%Y%m%d%H'),
-                    ctrler.raw_root, str(ctrler.ndays)))
+                ctrler.start_time.strftime('%Y%m%d%H'),
+                ctrler.raw_root, str(ctrler.ndays)))
     if ctrler.run_wps:
         ctrler.ctrl_run_wps()
     
