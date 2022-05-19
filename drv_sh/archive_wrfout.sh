@@ -10,4 +10,5 @@ if [ ! -d "${ARCHIVE}" ]; then
     mkdir ${ARCHIVE}
 fi
 mv ${WRF_DIR}/wrfout* ${ARCHIVE}/
+mv ${WRF_DIR}/wrfx* ${ARCHIVE}/
 
