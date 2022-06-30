@@ -26,7 +26,7 @@ def main_run():
     utils.write_log('Read Config...')
     
     # controller config handler
-    cfg_hdl=lib.cfgparser.read_cfg(CWD+'/conf/config.s2s.cfs.ini')
+    cfg_hdl=lib.cfgparser.read_cfg(CWD+'/conf/config.ini')
  
     utils.write_log('Construct dispatcher...')
     
