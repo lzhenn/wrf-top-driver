@@ -100,7 +100,7 @@ class Dispatcher:
                     'pressure_level':CONST_DIC['ERA5_PL_LAYS'],
                     'date':curr_time_obj.strftime('%Y%m%d'),
                     'area':cfg['DOWNLOAD']['area_nwse'],
-                    'time':'00/to/23/by/1',
+                    'time':'00/to/23/by/3',
                     'variable':CONST_DIC['ERA5_PL_VARS'],
                     },
                 self.raw_root+'/'+curr_time_obj.strftime('%Y%m%d')+'-pl.grib')
