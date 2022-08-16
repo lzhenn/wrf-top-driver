@@ -20,7 +20,7 @@
  history_interval                    = 60,    60,    60,
  frames_per_outfile                  = 1,    24,    48,
  restart                             = .false.,
- restart_interval                    = 14400,
+ restart_interval                    = 1440,
  auxinput4_inname                    = "wrflowinp_d<domain>",
  auxinput4_interval                  = 180,   180,    360,
  io_form_history                     = 2,
