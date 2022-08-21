@@ -106,7 +106,7 @@
  /
 
 &fdda
- grid_fdda                           = 2,     0,     0,     0,
+ grid_fdda                           = 0,     0,     0,     0,
  gfdda_inname                        = "wrffdda_d<domain>",
  gfdda_end_h                         = 9999,   9999,     0,     0,
  gfdda_interval_m                    = 180,   60,     0,     0,

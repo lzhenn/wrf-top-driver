@@ -57,7 +57,8 @@ class Dispatcher:
         self.geo_rewrite=cfg['CORE'].getboolean('rewrite_geo_em')
         self.ntask=cfg['CORE']['ntask']
 
-        self.archroot=cfg['POSTPROCESS']['archive_root']
+        self.archroot=utils.parse_fmt_timepath(
+            self.start_time,cfg['POSTPROCESS']['archive_root'])
         self.archive=cfg['POSTPROCESS'].getboolean('arch_wrfout')
     
     def down_era5(self, cfg):
