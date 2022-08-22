@@ -37,14 +37,13 @@ class Dispatcher:
     def __init__(self, cfg):
         """ construct dispatcher obj """
         self.drv_type=cfg['INPUT']['drv_type']
-        self.raw_root=cfg['INPUT']['raw_root']
         self.wps_root=cfg['INPUT']['wps_root']
         self.wrf_root=cfg['INPUT']['wrf_root']
         self.nml_temp=cfg['INPUT']['nml_temp']
 
         self.start_time=datetime.datetime.strptime(cfg['INPUT']['model_init_ts'],'%Y%m%d%H')
-        if not (self.drv_type =='era5'):
-            self.raw_root=cfg['INPUT']['raw_root']+'/'+self.start_time.strftime('%Y%m%d%H')
+        self.raw_root=utils.parse_fmt_timepath(
+            self.start_time, cfg['INPUT']['raw_root'])
         
         self.ndays=int(cfg['INPUT']['model_run_days'])
         self.end_time=self.start_time+datetime.timedelta(days=self.ndays)

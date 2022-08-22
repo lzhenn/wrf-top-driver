@@ -23,20 +23,20 @@
 
 # Initial time 
 # 2021/202109/20210901/2021090100/
-STRT_YMDH=$1
-#STRT_YMDH=2014063000
+#STRT_YMDH=$1
+STRT_YMDH=2022062800
 
 # Archive path
-ARCH_PATH=$2
-#ARCH_PATH=/home/metctm1/array/data/cfsv2/realtime/$STRT_YMDH
+#ARCH_PATH=$2
+ARCH_PATH=/home/metctm1/array/data/cfsv2/realtime/$STRT_YMDH
 
 if [ ! -d $ARCH_PATH ]; then
     mkdir $ARCH_PATH
 fi
 
 # How long period to fecth
-FCST_DAY=$3
-#FCST_DAY=45
+#FCST_DAY=$3
+FCST_DAY=40
 
 # ------------Upper for user-defined configurations ------------
 # The interval to fetch CFS output, 6-hr only
@@ -45,7 +45,6 @@ FCST_DAY=$3
 FRQ=6
 
 TOTAL_HR=`expr $FCST_DAY \* 24`
-
 BASE_URL="https://www.ncei.noaa.gov/data/climate-forecast-system/access/operational-9-month-forecast/6-hourly-by-pressure/"
 YYYY=${STRT_YMDH:0:4}
 YYYYMM=${STRT_YMDH:0:6}
