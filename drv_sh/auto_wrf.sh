@@ -4,7 +4,7 @@ echo $@
 
 STRT_DATE=${1}
 END_DATE=${2}
-NDAYS=${3}
+NHOURS=${3}
 INIT_HR=${4}
 END_HR=${5}
 WPS_DIR=${6}
@@ -39,7 +39,7 @@ DD_NLE=${END_DATE_PACK:6:2}
 echo ">>>>WRF-REAL:Clean Pre-existed Files..."
 cd $WRF_DIR
 
-sed -i "/run_days/s/^.*$/ run_days                          = ${NDAYS},/g" namelist.input
+sed -i "/run_hours/s/^.*$/ run_hours                          = ${NHOURS},/g" namelist.input
 sed -i "/start_year/s/^.*$/ start_year                          = ${YYYY_NLS}, ${YYYY_NLS}, ${YYYY_NLS}, ${YYYY_NLS},/g" namelist.input
 sed -i "/start_year/s/^.*$/ start_year                          = ${YYYY_NLS}, ${YYYY_NLS}, ${YYYY_NLS}, ${YYYY_NLS},/g" namelist.input
 sed -i "/end_year/s/^.*$/ end_year                            = ${YYYY_NLE}, ${YYYY_NLE}, ${YYYY_NLE}, ${YYYY_NLE},/g" namelist.input

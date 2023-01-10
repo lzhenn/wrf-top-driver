@@ -4,11 +4,10 @@ echo $@
 
 STRT_DATE=${1}
 END_DATE=${2}
-NDAYS=${3}
-STRT_HR=${4}
-END_HR=${5}
-ERADIR=${6}
-WPSDIR=${7}
+STRT_HR=${3}
+END_HR=${4}
+ERADIR=${5}
+WPSDIR=${6}
 
 # date parser
 LID_NLS=$STRT_DATE

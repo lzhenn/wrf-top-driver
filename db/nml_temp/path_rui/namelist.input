@@ -15,9 +15,9 @@
  end_hour                          = 00, 00, 00, 00,
  end_minute                          = 00,   00,   00,   00,
  end_second                          = 00,   00,   00,   00,
- interval_seconds                    = 3600
+ interval_seconds                    = 10800
  input_from_file                     = .true.,.true.,.true.,.true.,
- history_interval                    = 60,   60,   60,   60,
+ history_interval                    = 60,   60,   6,   6,
  frames_per_outfile                  = 1,    1,    1,    1,
  restart                             = .false.,
  restart_interval                    = 14400,
@@ -47,7 +47,7 @@
  s_vert                              = 1,     1,     1,    1,
  e_vert                              = 39,    39,    39,   39,
  p_top_requested                     = 7000,
- num_metgrid_levels                  = 23,
+ num_metgrid_levels                  = 24,
  num_metgrid_soil_levels             = 4,
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -78,11 +78,20 @@
  /
 
  &physics
- physics_suite = 'tropical'
+ mp_physics                          = 3,     3,    3,  3,
+ ra_lw_physics                       = 4,     4,    4,  4,
+ ra_sw_physics                       = 4,     4,    4,  4,
  radt                                = 10,    10,   10, 10,
+ sf_sfclay_physics                   = 1,     1,    1,  1,
+ sf_surface_physics                  = 2,     2,    2,  2,
+!===========================================================
+!PBL = 8 is boulac > local for BEP
+!PBL = 8 is ACM2 > non-local
+ bl_pbl_physics                      = 7,     7,    7,  7,
+!===========================================================
  bldt                                = 0,     0,    0,  0,
- cu_physics                          = 16,    16,    0,  0,
- cudt                                = 0,     0,    0,  0,
+ cu_physics                          = 5,     5,    0,  0,
+ cudt                                = 0,     0,    5,  5,
  isfflx                              = 1,
  ifsnow                              = 0,
  icloud                              = 1,
@@ -106,7 +115,7 @@
  grid_fdda                           = 1,     0,     0,     0,
  gfdda_inname                        = "wrffdda_d<domain>",
  gfdda_end_h                         = 99999,    0,     0,     0,
- gfdda_interval_m                    = 360,   0,     0,     0,
+ gfdda_interval_m                    = 180,   0,     0,     0,
  fgdt                                = 0,     0,     0,     0,
  if_no_pbl_nudging_uv                = 0,     0,     0,     0,
  if_no_pbl_nudging_t                 = 1,     1,     1,     1,

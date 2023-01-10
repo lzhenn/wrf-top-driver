@@ -2,7 +2,7 @@
 '''
 Date: May 1, 2021 (Labour Day!)
 
-This is the main script to drive the era5-wrf-driver 
+This is the main script to drive the wrf top driver
 
 Revision:
 Oct 23, 2021 --- Fit for CFSv2
