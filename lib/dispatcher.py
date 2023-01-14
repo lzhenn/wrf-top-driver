@@ -40,9 +40,9 @@ class Dispatcher:
         self.wps_root=cfg['INPUT']['wps_root']
         self.wrf_root=cfg['INPUT']['wrf_root']
         self.nml_temp=cfg['INPUT']['nml_temp']
+        self.raw_root=cfg['INPUT']['raw_root']
 
         self.start_time=datetime.datetime.strptime(cfg['INPUT']['model_init_ts'],'%Y%m%d%H')
-<<<<<<< HEAD
         if not (self.drv_type =='era5'):
             self.raw_root=cfg['INPUT']['raw_root']+'/'+self.start_time.strftime('%Y%m%d%H')
         try: 
@@ -53,15 +53,6 @@ class Dispatcher:
             self.end_time=self.start_time+datetime.timedelta(days=self.ndays)
 
         self.nhours=int((self.end_time-self.start_time).total_seconds()/3600)
-=======
-        self.raw_root=utils.parse_fmt_timepath(
-            self.start_time, cfg['INPUT']['raw_root'])
-        
-        self.ndays=int(cfg['INPUT']['model_run_days'])
-        self.end_time=self.start_time+datetime.timedelta(days=self.ndays)
-        
->>>>>>> a6310949e2202a596cf872216158ca9fae337c5a
-
         self.run_wps=cfg['CORE'].getboolean('run_wps')
         self.run_real=cfg['CORE'].getboolean('run_real')
         self.run_wrf=cfg['CORE'].getboolean('run_wrf')

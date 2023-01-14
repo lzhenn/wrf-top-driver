@@ -14,20 +14,28 @@ Zhenning LI
 import os, sys, logging.config
 import datetime
 import lib 
+import argparse
 from utils import utils
 
 CWD=sys.path[0]
 
 def main_run():
-    
+
+    parser = argparse.ArgumentParser(
+                prog='serial_driver.py',
+                    formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument(
+        '-c', type=str, default='config.ini', 
+        help='config file name')
+    args = parser.parse_args()
+
     # logging manager
     logging.config.fileConfig(CWD+'/conf/logging_config.ini')
     
     utils.write_log('Read Config...')
     
     # controller config handler
-    cfg_hdl=lib.cfgparser.read_cfg(CWD+'/conf/config.ini')
- 
+    cfg_hdl=lib.cfgparser.read_cfg(CWD+'/conf/'+args.c)
     utils.write_log('Construct dispatcher...')
     
     ctrler=lib.dispatcher.Dispatcher(cfg_hdl)
