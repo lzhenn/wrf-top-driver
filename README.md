@@ -43,8 +43,10 @@ ntask=32
 
 ```
 
-#### Run top_driver.py
+#### Run driver.py
 Now in the root directory, let's use python3 to drive the pipeline:
 ``` sh
-python3 top_driver.py
+python3 serial_driver.py
 ```
+
+#### Generate wrfout template

@@ -9,7 +9,6 @@
 
 import datetime
 import os
-import cdsapi
 from utils import utils
 
 print_prefix='lib.dispatcher>>'
@@ -67,6 +66,7 @@ class Dispatcher:
     def down_era5(self, cfg):
         ''' Download ERA5 pres and single lv data '''
         # Area: North/West/South/East
+        import cdsapi
         c = cdsapi.Client()
         int_time_obj = self.start_time
         end_time_obj = self.end_time 
