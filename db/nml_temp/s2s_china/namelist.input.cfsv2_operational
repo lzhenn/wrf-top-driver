@@ -18,9 +18,9 @@
  interval_seconds                    = 21600
  input_from_file                     = .true.,.true.,.true.,
  history_interval                    = 60,    60,    60,
- frames_per_outfile                  = 24,    24,    48,
+ frames_per_outfile                  = 1,    24,    48,
  restart                             = .false.,
- restart_interval                    = 14400,
+ restart_interval                    = 1440,
  auxinput4_inname                    = "wrflowinp_d<domain>",
  auxinput4_interval                  = 360,   360,    360,
  io_form_history                     = 2,
@@ -43,10 +43,10 @@
  /
 
  &domains
- time_step                           = 45,
+ time_step                           = 60,
  time_step_fract_num                 = 0,
  time_step_fract_den                 = 1,
- max_dom                             = 2,
+ max_dom                             = 1,
  e_we                                = 460,   241,   379,
  e_sn                                = 340,   241,   379,
  e_vert                              = 39,    39,    51,
